@@ -13,27 +13,25 @@ function App() {
       id: 1,
       completed: false,
       title: "Feed the cat",
-      description: "aaaaaaaaaa",
+      description: "I love baking pie. You already know this. But this wasn’t always the case. Up until 4 years ago, baking pie from scratch was foreign to me. Something for the bakeries, certainly not me. Pie crust? Forget about it. Homemade filling? Nope. It’s all too complicated and scary. But guess what? Baking pie is nothing to fear. In fact, after having lots of practice, I now think of baking pie as my own little cheap therapy session. Something about mixing that pie dough by hand, rolling it all out, making cute pie crust designs, and smelling that glorious fresh-baked pie in the oven is therapeutic for me. It’s my me time and something I enjoy doing just because. No other baked good gives me the content satisfaction that pie does. Plus it tastes pretty awesome no matter which flavor is on the menu. (Apple Pie, anyone?!) And that’s why I wanted to share this cherry pie recipe with you. Out of all pie flavors and varieties, I feel like cherry pie is where most depend on canned filling. Which is certainly delicious and convenient! But that’s the challenge– making it with fresh cherries.",
     },
     {
       id: 2,
       completed: false,
       title: "Feed the dog",
-      description: "bbbbbbbbbbb",
+      description: "I love baking pie. You already know this. But this wasn’t always the case. Up until 4 years ago, baking pie from scratch was foreign to me. Something for the bakeries, certainly not me. Pie crust? Forget about it. Homemade filling? Nope. It’s all too complicated and scary. But guess what? Baking pie is nothing to fear. In fact, after having lots of practice, I now think of baking pie as my own little cheap therapy session. Something about mixing that pie dough by hand, rolling it all out, making cute pie crust designs, and smelling that glorious fresh-baked pie in the oven is therapeutic for me. It’s my me time and something I enjoy doing just because. No other baked good gives me the content satisfaction that pie does. Plus it tastes pretty awesome no matter which flavor is on the menu. (Apple Pie, anyone?!) And that’s why I wanted to share this cherry pie recipe with you. Out of all pie flavors and varieties, I feel like cherry pie is where most depend on canned filling. Which is certainly delicious and convenient! But that’s the challenge– making it with fresh cherries.",
     },
     {
       id: 3,
       completed: false,
       title: "Feed the cow",
-      description: "ccccccccc",
+      description: "I love baking pie. You already know this. But this wasn’t always the case. Up until 4 years ago, baking pie from scratch was foreign to me. Something for the bakeries, certainly not me. Pie crust? Forget about it. Homemade filling? Nope. It’s all too complicated and scary. But guess what? Baking pie is nothing to fear. In fact, after having lots of practice, I now think of baking pie as my own little cheap therapy session. Something about mixing that pie dough by hand, rolling it all out, making cute pie crust designs, and smelling that glorious fresh-baked pie in the oven is therapeutic for me. It’s my me time and something I enjoy doing just because. No other baked good gives me the content satisfaction that pie does. Plus it tastes pretty awesome no matter which flavor is on the menu. (Apple Pie, anyone?!) And that’s why I wanted to share this cherry pie recipe with you. Out of all pie flavors and varieties, I feel like cherry pie is where most depend on canned filling. Which is certainly delicious and convenient! But that’s the challenge– making it with fresh cherries.",
     },
   ]);
 
   const [filter, setFilter] = useState("");
 
   const [description, setDescription] = useState(null);
-
-
 
   function switchTodo(id) {
     setTodos(
@@ -46,14 +44,14 @@ function App() {
     );
   }
 
-  function addTodo(title) {
+  function addTodo(title, description) {
     setTodos(
       todos.concat([
         {
           id: Date.now(),
           title,
           completed: false,
-          description: "ddddddddd",
+          description,
         },
       ])
     );
@@ -68,9 +66,11 @@ function App() {
   }
 
   function showDescription(id) {
-    todos.forEach(element => {
+    debugger
+    todos.forEach((element) => {
       if (element.id === id) {
-        setDescription(element.description)}
+        setDescription(element.description);
+      }
     });
   }
 
@@ -83,8 +83,10 @@ function App() {
           render={() => (
             <div className="App">
               <h1>TODO List</h1>
-              <AddTodo onCreateTodo={addTodo} />
-              <FilterTodos filterTodos={filterTodos} />
+              <div className='App-header'>
+                <AddTodo onCreateTodo={addTodo} />
+                <FilterTodos filterTodos={filterTodos} />
+              </div>
               {todos.length ? (
                 <TodoList todos={todos} onSwitch={switchTodo} filter={filter} />
               ) : (
@@ -93,7 +95,10 @@ function App() {
             </div>
           )}
         />
-        <Route path="/description" render={() => <Description description={description} />} />
+        <Route
+          path="/description"
+          render={() => <Description description={description} />}
+        />
       </Switch>
     </Context.Provider>
   );

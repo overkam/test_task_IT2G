@@ -1,7 +1,16 @@
-.modal-wrapper {
-  display: inline;
+.description {
+  margin: 50px auto;
+  width: 600px;
+  text-align: center;
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 15px;
+  font-size: 18px;
 }
-.modal {
-  display: inline;
-  background-color: red;
+.description button {
+  border: none ;
+  background-color: white;
+}
+.description-link {
+  text-decoration: none;
 }

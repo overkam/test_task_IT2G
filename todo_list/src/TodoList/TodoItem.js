@@ -1,11 +1,14 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import "./TodoItem.css";
 import { NavLink } from "react-router-dom";
 import Context from "../context";
+import Checkbox from "@material-ui/core/Checkbox";
+import IconButton from "@material-ui/core/IconButton";
+import DeleteIcon from "@material-ui/icons/Delete";
 
-function TodoItem({ item, index, onChange }) {
-  const {removeTodo, showDescription} = useContext(Context)
+function TodoItem({ item, onChange }) {
+  const { removeTodo, showDescription } = useContext(Context);
   const classes = [];
 
   if (item.completed) {
@@ -13,29 +16,42 @@ function TodoItem({ item, index, onChange }) {
   }
 
   function onShowDescription(event) {
-    showDescription(+event.target.id)
+    showDescription(+event.target.id);
   }
 
   return (
-    <li className="todo-item">
-      <span className={classes.join(" ")}>
-        <input
-          type="checkbox"
+    <li className={`todo-item ${classes.join(" ")}`} id={item.id}>
+      <span>
+        <Checkbox
+          defaultChecked
+          color="primary"
           checked={item.completed}
           onChange={() => onChange(item.id)}
+          className="todo-item-checkbox"
+          inputProps={{ "aria-label": "secondary checkbox" }}
         />
-        <strong>{index + 1}</strong>
-        {item.title}
+        <NavLink
+          to={`/description/${item.id}`}
+          onClick={onShowDescription}
+          id={item.id}
+          className="todo-item-link"
+        >
+          {item.title}
+        </NavLink>
       </span>
-      <NavLink to={`/description/${item.id}`} onClick={onShowDescription} id={item.id}>Read more</NavLink>
-      <button className='delete-btn' onClick={removeTodo.bind(null, item.id)} >Delete</button>
+      <IconButton
+        aria-label="delete"
+        className="delete-btn"
+        onClick={removeTodo.bind(null, item.id)}
+      >
+        <DeleteIcon />
+      </IconButton>
     </li>
   );
 }
 
 TodoItem.propTypes = {
   item: PropTypes.object.isRequired,
-  index: PropTypes.number,
   onChange: PropTypes.func.isRequired,
 };
 

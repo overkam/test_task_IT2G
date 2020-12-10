@@ -1,7 +1,13 @@
 .App {
-  margin: 100px auto;
+  margin: 50px auto;
   width: 600px;
 }
 .App h1 {
   text-align: center;
+}
+.App-header {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  position: relative;
 }

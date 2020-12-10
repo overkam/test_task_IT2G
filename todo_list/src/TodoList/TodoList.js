@@ -27,7 +27,6 @@ function TodoList(props) {
         <TodoItem
           key={item.id}
           item={item}
-          index={i}
           onChange={props.onSwitch}
         />
       );
